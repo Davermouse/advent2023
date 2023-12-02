@@ -25,14 +25,14 @@ pub fn run_day1() {
         return f.to_digit(10).expect("First is not a digit") * 10 + e.to_digit(10).expect("Last is not a digit");
     }).sum::<u32>();
 
-    print!("Part 1 total: {}", total);
+    println!("Part 1 total: {}", total);
 
     let numeric_spelled_lines = 
         lines.iter()
             .map(|l| 
                 convert_numbers(l.to_string()).chars().filter(|c| c.is_numeric()).collect::<String>()
             ).collect::<Vec<_>>();
-            
+
     let spelled_total = numeric_spelled_lines.iter().map(|l| {
         let mut cs = l.chars().collect::<Vec<_>>();
         let f = cs[0];
@@ -42,7 +42,7 @@ pub fn run_day1() {
         return f.to_digit(10).expect("First is not a digit") * 10 + e.to_digit(10).expect("Last is not a digit");
     }).sum::<u32>();
 
-    print!("Part 2 total: {}", spelled_total);
+    println!("Part 2 total: {}", spelled_total);
 
 }
 
