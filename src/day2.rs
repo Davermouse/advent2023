@@ -106,5 +106,5 @@ pub fn run_day2() {
                             max_r * max_b * max_g
                         }).sum::<u32>();
 
-    print!("Miniumum powers: {}", game_powers);
+    println!("Miniumum powers: {}", game_powers);
 }
