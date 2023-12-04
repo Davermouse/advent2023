@@ -14,6 +14,10 @@ struct Card {
     numbers: HashSet<i32>,
 }
 
+fn compute_score(c: &Card) -> usize {
+    return c.winning.iter().filter(|w| c.numbers.contains(w)).count();
+}
+
 // Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
 fn parse_card(i: &str) -> IResult<&str, Card> {
     let (i, _) = tag("Card")(i)?;
@@ -53,14 +57,30 @@ pub fn run_day4() {
 
     let score: u32 = cards.iter().map(
         |c| {
-        let w = c.winning.iter().filter(|w| c.numbers.contains(w)).count();
+        let score = compute_score(c);
 
-        if w == 0 {
+        if score == 0 {
             return 0;
         } else {
-            return 2_u32.pow((w - 1).try_into().unwrap());
+            return 2_u32.pow((score - 1).try_into().unwrap());
         }
     }).sum();
 
     println!("Part 1: {}", score);
+
+    let mut copies = vec!(1 ; cards.len());
+
+    for i in 0..cards.len() {
+        let card = &cards[i];
+        let amount = copies[i];
+        let score = compute_score(card);
+
+        for n in (i+1)..(i+1+score) {
+            copies[n] += amount;
+        }
+    }
+
+    let total_cards: i32 = copies.iter().sum();
+
+    println!("Part 2: {}", total_cards);
 }

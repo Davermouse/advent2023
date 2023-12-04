@@ -131,8 +131,6 @@ pub fn run_day3() {
     let mut ratio_total = 0;
 
     for y in 0..height {
-        let mut x = 0;
-
         for x in 0..width {
             let c = &engine[y][x];
 
