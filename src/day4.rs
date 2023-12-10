@@ -9,7 +9,6 @@ use nom::bytes::complete::tag;
 use nom::character::complete::i32;
 
 struct Card {
-    id: i32,
     winning: HashSet<i32>,
     numbers: HashSet<i32>,
 }
@@ -35,8 +34,7 @@ fn parse_card(i: &str) -> IResult<&str, Card> {
         multispace1, 
         i32)(i)?;
 
-    Ok((i, Card { 
-        id: id, 
+    Ok((i, Card {
         winning: HashSet::from_iter(winning.into_iter()), 
         numbers: HashSet::from_iter(numbers.into_iter()) 
     }))
